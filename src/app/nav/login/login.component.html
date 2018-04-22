@@ -1,3 +1,12 @@
-<form class="form-inline my-2 my-md-0">
-  <input type="text" name="usernam" placeholder="username">
-</form>
+<div class="form-inline" *ngIf="logged;then loggedIn else userPass"></div>
+
+<ng-template #userPass>
+  <form class="form-inline" (keyup.enter)="login()">
+    <input class="form-control" type="text" [(ngModel)]="username" name="username" placeholder="Username">
+    <input class="form-control" type="password" [(ngModel)]="password" name="password" placeholder="Password">
+  </form>
+</ng-template>
+
+<ng-template #loggedIn>
+  <button type="button" class="btn btn-success" (click)="logout()">Success</button>
+</ng-template>

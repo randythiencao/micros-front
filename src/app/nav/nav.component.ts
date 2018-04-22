@@ -8,8 +8,17 @@ import { Component, OnInit } from '@angular/core';
 export class NavComponent implements OnInit {
 
   constructor() { }
-
+  logged = false;
   ngOnInit() {
+    sessionStorage.setItem('logged', 'N');
+  }
+
+  onNotify(logged: boolean) {
+    if (logged) {
+      sessionStorage.setItem('logged', 'Y');
+    } else {
+      sessionStorage.setItem('logged', 'N');
+    }
   }
 
 }
