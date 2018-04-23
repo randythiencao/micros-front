@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-nav',
@@ -7,18 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
 
+  @Output()
+  notify: EventEmitter<string> = new EventEmitter<string>();
   constructor() { }
-  logged = false;
+
   ngOnInit() {
-    sessionStorage.setItem('logged', 'N');
   }
 
-  onNotify(logged: boolean) {
-    if (logged) {
-      sessionStorage.setItem('logged', 'Y');
-    } else {
-      sessionStorage.setItem('logged', 'N');
+  onNotify(logged: string) {
+    if (logged == null || logged === '') {
+      logged = 'N';
     }
+    this.notify.emit(logged);
   }
 
 }

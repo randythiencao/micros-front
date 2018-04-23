@@ -1,9 +1,9 @@
-<div class="form-inline" *ngIf="logged;then loggedIn else userPass"></div>
+<div class="form-inline" *ngIf="logged === 'Y';then loggedIn else userPass"></div>
 
 <ng-template #userPass>
   <form class="form-inline" (keyup.enter)="login()">
-    <input class="form-control" type="text" [(ngModel)]="username" name="username" placeholder="Username">
-    <input class="form-control" type="password" [(ngModel)]="password" name="password" placeholder="Password">
+    <input class="form-control" type="text" [(ngModel)]="cred.username" #username="ngModel" name="username" placeholder="Username">
+    <input class="form-control" type="password" [(ngModel)]="cred.password" #password="ngModel" name="password" placeholder="Password">
   </form>
 </ng-template>
 
