@@ -9,20 +9,14 @@ import { Subscription } from 'rxjs/Subscription';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
-  @Output()
-  notify: EventEmitter<string> = new EventEmitter<string>();
   sub: Subscription;
   logged: string;
   cred: Cred;
 
   constructor(private authService: AuthService) {
+    sessionStorage.setItem('logged', 'N');
     this.cred = new Cred();
     this.logged = 'N';
-    this.authService.login(this.cred).subscribe((resp) => {
-      this.logged = resp.toString();
-    });
-    this.notify.emit(this.logged);
   }
 
   ngOnInit() {
@@ -32,13 +26,10 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.cred).subscribe((resp) => {
       this.logged = resp.toString();
     });
-    console.log('login ' + this.logged);
-    this.notify.emit(this.logged);
   }
 
   logout() {
-    this.logged = 'N';
-    this.notify.emit(this.logged);
+    this.authService.logout();
   }
 
 }

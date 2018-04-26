@@ -8,18 +8,10 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class NavComponent implements OnInit {
 
-  @Output()
-  notify: EventEmitter<string> = new EventEmitter<string>();
   constructor() { }
 
   ngOnInit() {
   }
 
-  onNotify(logged: string) {
-    if (logged == null || logged === '') {
-      logged = 'N';
-    }
-    this.notify.emit(logged);
-  }
 
 }

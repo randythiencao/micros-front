@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,11 +10,14 @@ export class AppComponent implements OnInit {
   title = 'app';
   logged: string;
 
+  constructor(private authService: AuthService) { }
   ngOnInit() {
     this.logged = 'N';
+    this.authService.isLogged().subscribe((resp) => {
+      this.logged = resp;
+    });
   }
 
-  onNotify(logged: string) {
-    this.logged = logged;
-  }
+
+
 }
