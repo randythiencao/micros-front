@@ -27,20 +27,23 @@
         <a class="nav-link disabled" href="#">Disabled</a>
       </li>
     </ul>
-    <div *ngIf="show;then loginGroup; else loginForm"></div>
-    <!-- <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form> -->
+    <div *ngIf="show;then loginForm;else loginGroup"></div>
+    
   </div>
 </nav>
 
-
-<ng-template #loginForm>
-  <app-login></app-login>
+<ng-template #loginGroup>
+    <div class="row">
+  <button class="btn btn-primary margin-right" label="Log In" (click)="enableForm()">Sign in</button>
+  <button class="btn btn-primary margin-right" label="Register">Sign up</button>
+  </div>
 </ng-template>
 
-<ng-template #loginGroup>
-  <button class="btn btn-primary" label="Log In">Log</button>
-  <button class="btn btn-primary" label="Register">Reg</button>
+<ng-template #loginForm>
+  <div *ngIf="!loggedin; else welcome">
+    <app-login (showChange)="setShow($event)"></app-login>
+  </div>
+  <ng-template #welcome>
+    Welcome, {{currentUser.username}}
+  </ng-template>
 </ng-template>

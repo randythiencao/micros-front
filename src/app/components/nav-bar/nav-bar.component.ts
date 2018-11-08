@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { LoginComponent } from '../auth/login/login.component';
+import { User } from '../../_entities/user';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'nav-bar',
@@ -9,14 +11,25 @@ import { LoginComponent } from '../auth/login/login.component';
 export class NavBarComponent implements OnInit {
   @ViewChild(LoginComponent)
   loginComponent: LoginComponent;
-  constructor() { }
-
-  ngOnInit() {
+  show: boolean;
+  loggedin: boolean;
+  currentUser: User;
+  constructor(private sharedService: SharedService) {
   }
 
-  ngAfterViewInit() {
-    console.log('Values on ngAfterViewInit():');
-    console.log('primaryColorSample:', this.loginComponent.show);
-  }  
+  ngOnInit() {
+    this.show = false;
+    this.sharedService.loggedIn.subscribe(user => this.currentUser = user);
+    console.log(this.currentUser);
+  }
+
+  enableForm() {
+    this.show = true;
+  }
+
+  setShow(value) {
+    this.show = value.show;
+    this.loggedin = value.logged;
+  }
 
 }

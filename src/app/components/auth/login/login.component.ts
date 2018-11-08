@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { User } from '../../../_entities/user';
+import { SharedService } from '../../../services/shared.service';
+import { AlertsService } from '../../../services/alerts.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -9,17 +11,21 @@ import { User } from '../../../_entities/user';
 })
 export class LoginComponent implements OnInit {
 
+  @Output() showChange = new EventEmitter<any>();
+
   loginForm: FormGroup;
   loading = false;
   submitted = false;
   returnUrl: String;
   action: String;
   model: User;
-  show: false;
+
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthenticationService) { }
+    private authService: AuthenticationService,
+    private sharedService: SharedService,
+    private alertService: AlertsService) { }
 
   ngOnInit() {
     this.model = new User();
@@ -42,21 +48,18 @@ export class LoginComponent implements OnInit {
     this.model.password = this.f.password.value;
 
     this.loading = true;
-    if (this.action === 'login') {
+    if (this.action === 'loginBtn') {
       this.authService.login(this.model)
         .subscribe(
           data => {
-            //this.alertService.success('Registration successful', true);
-            //this.router.navigate(['/login']);
-            console.log(data);
+            this.showChange.emit({ logged: true, show: true });
+            this.sharedService.updateLoggedIn(data);
           },
           error => {
-            //this.alertService.error(error);
             this.loading = false;
+            this.showChange.emit({ logged: false, show: true });
+            this.alertService.error('Wrong Username/Password');
           });
-    } else if (this.action === 'cancel') {
-      
-      this.show = false;
     }
   }
 
@@ -66,4 +69,9 @@ export class LoginComponent implements OnInit {
     const value = idAttr.nodeValue;
     this.action = value;
   }
+
+  cancel() {
+    this.showChange.emit({ logged: false, show: false });
+  }
+
 }

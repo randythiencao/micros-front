@@ -8,7 +8,6 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthenticationService {
-
   constructor(private http: HttpClient) { }
 
   login(user: User): Observable<User> {
