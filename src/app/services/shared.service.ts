@@ -22,4 +22,8 @@ export class SharedService {
   updateLoggedIn(data: User) {
     this.loggedInSubj.next(data);
   }
+
+  logout() {
+    this.loggedInSubj.next(new User());
+  }
 }

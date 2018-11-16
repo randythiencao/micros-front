@@ -1,0 +1,8 @@
+<div class="container">
+  <input type="text" list="recents" id="url" placeholder="URL">
+  <datalist id="recents">
+    <option *ngFor="let recent of recentURLs" value="recent.value">
+  </datalist>
+{{recentURLs}}
+
+</div>

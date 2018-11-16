@@ -7,7 +7,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" routerLink="/">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Link</a>
@@ -35,7 +35,7 @@
 <ng-template #loginGroup>
     <div class="row">
   <button class="btn btn-primary margin-right" label="Log In" (click)="enableForm()">Sign in</button>
-  <button class="btn btn-primary margin-right" label="Register">Sign up</button>
+  <button class="btn btn-primary margin-right" label="Register" routerLink="/register" >Sign up</button>
   </div>
 </ng-template>
 
@@ -43,7 +43,11 @@
   <div *ngIf="!loggedin; else welcome">
     <app-login (showChange)="setShow($event)"></app-login>
   </div>
+
   <ng-template #welcome>
-    Welcome, {{currentUser.username}}
+    <p class="small">
+      <span id="welcomeUser">Welcome, {{currentUser.firstname}} {{currentUser.lastname}}</span><br>
+      <u><a class="logoutLink" routerLink="/" (click)="logout()">Log out</a></u>
+    </p>
   </ng-template>
 </ng-template>

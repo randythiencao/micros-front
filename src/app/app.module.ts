@@ -14,6 +14,9 @@ import { AuthenticationService } from './services/authentication.service';
 import { SharedService } from './services/shared.service';
 import { AlertsService } from './services/alerts.service';
 import { AlertsComponent } from './components/alerts/alerts.component';
+import { RegisterComponent } from './components/register/register.component';
+import { InitTestComponent } from './components/init-test/init-test.component';
+import { InitTestService } from './services/init-test.service';
 
 
 
@@ -22,7 +25,9 @@ import { AlertsComponent } from './components/alerts/alerts.component';
     AppComponent,
     LoginComponent,
     NavBarComponent,
-    AlertsComponent
+    AlertsComponent,
+    RegisterComponent,
+    InitTestComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +41,8 @@ import { AlertsComponent } from './components/alerts/alerts.component';
   providers: [
     AuthenticationService,
     SharedService,
-    AlertsService
+    AlertsService,
+    InitTestService
   ],
   bootstrap: [AppComponent]
 })

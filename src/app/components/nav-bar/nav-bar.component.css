@@ -1,0 +1,18 @@
+.userInfo {
+    height: 50%;
+    width: 10%;
+    background-color: powderblue;
+}
+
+p.small {
+    line-height: 1.1;
+    text-align: right;
+}
+
+p {
+    margin-bottom: 0;
+}
+
+#welcomeUser{
+    font-size: 16px;
+}

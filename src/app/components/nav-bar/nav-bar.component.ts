@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { LoginComponent } from '../auth/login/login.component';
 import { User } from '../../_entities/user';
 import { SharedService } from 'src/app/services/shared.service';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'nav-bar',
@@ -14,7 +15,8 @@ export class NavBarComponent implements OnInit {
   show: boolean;
   loggedin: boolean;
   currentUser: User;
-  constructor(private sharedService: SharedService) {
+  constructor(
+    private sharedService: SharedService) {
   }
 
   ngOnInit() {
@@ -32,4 +34,9 @@ export class NavBarComponent implements OnInit {
     this.loggedin = value.logged;
   }
 
+  logout() {
+    this.sharedService.logout();
+    this.show = false;
+    this.loggedin = false;
+  }
 }

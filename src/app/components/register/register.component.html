@@ -1,0 +1,20 @@
+<div class="container">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="form-inline">
+    <div class="row">
+      <div class="form-group col-xs-3">
+        <input type="text" placeholder="Username" formControlName="username" class="form-control form-control-sm margin-right"
+          [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+      </div>
+      <div class="form-group col-xs-3">
+        <input type="password" placeholder="Password" formControlName="password" class="form-control form-control-sm margin-right"
+          [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+        <!-- <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+          <div *ngIf="f.password.errors.required">Password is required</div>
+        </div> -->
+      </div>
+      <button class="btn btn-primary btn-sm margin-right" id="regBtn" type="submit" label="Register" [disabled]="!registerForm.valid"
+        (click)="clicked($event)">Register</button>
+      <button class="btn btn-primary btn-sm" id="cancelBtn" type="button" label="Cancel" (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+</div>
