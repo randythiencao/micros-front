@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  context: 'http://10.20.181.167:8765'
+  context: 'http://10.21.172.57:8765'
 };
 
 /*

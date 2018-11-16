@@ -11,6 +11,6 @@ export class InitTestService {
   constructor(private http: HttpClient) { }
 
   getRecentURL(): Observable<any> {
-    return this.http.get<any>(environment.context + '/recentURL');
+    return this.http.get<any>(environment.context + '/test/initTest/1/recentURL');
   }
 }
